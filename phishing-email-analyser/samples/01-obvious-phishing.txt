@@ -1,0 +1,57 @@
+Return-Path: <bounce@mail-example-verify.invalid>
+X-Originating-IP: [203.0.113.45]
+X-Mailer: PHPMailer 6.1.7 (https://github.com/PHPMailer/PHPMailer)
+Received: from unknown (unknown [203.0.113.45])
+	by mx.example.org (Postfix) with SMTP id 4A9F1C2E
+	for <accounts@example.com>; Mon, 13 Oct 2025 09:14:02 +0000
+From: "Microsoft Account Team" <security@microsoft-account-verify.invalid>
+To: "Accounts Payable" <accounts@example.com>
+Reply-To: "Recovery Desk" <recovery.desk.7721@mailbox-provider.invalid>
+Subject: URGENT: Your account will be SUSPENDED within 24 hours
+Date: Mon, 13 Oct 2025 09:14:01 +0000
+Message-ID: <20251013091401.7f3c@microsoft-account-verify.invalid>
+Authentication-Results: mx.example.org; spf=fail smtp.mailfrom=microsoft-account-verify.invalid; dkim=fail (no key for signature) header.d=microsoft-account-verify.invalid; dmarc=fail (p=quarantine sp=quarantine) header.from=microsoft-account-verify.invalid
+Received-SPF: fail (mx.example.org: domain of security@microsoft-account-verify.invalid does not designate 203.0.113.45 as permitted sender) client-ip=203.0.113.45;
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="----=_Part_88213"
+
+------=_Part_88213
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Dear Customer,
+
+We detected unusual activity on your account. Your access will be DISABLED
+in 24 hours unless you verify your account immediately.
+
+To restore access, please confirm your identity by entering your username and
+password on our secure portal. You must also provide the 6-digit verification
+code that was sent to your phone so we can complete the security check.
+
+Verify your account here:
+hxxp://192.0.2.15:8080/microsoft/login/verify.php?session=9931
+
+Failure to comply will result in permanent account closure and legal action.
+
+We have also attached your invoice. You must Enable Editing and Enable Macros
+to view the payment instructions. If you prefer, we can accept payment by
+gift card - simply reply with the codes.
+
+Do not tell anyone about this security check. This is confidential.
+
+Regards,
+Microsoft Account Team
+
+------=_Part_88213
+Content-Type: application/octet-stream; name="Invoice_2025.pdf.exe"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Invoice_2025.pdf.exe"
+
+TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+------=_Part_88213
+Content-Type: application/octet-stream; name="Payment_Instructions.docm"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Payment_Instructions.docm"
+
+UEsDBBQABgAIAAAAIQDfpNJsWgEAACAFAAATAAgCW0NvbnRlbnRfVHlwZXNdLnhtbCCiBAIooAAC
+------=_Part_88213--

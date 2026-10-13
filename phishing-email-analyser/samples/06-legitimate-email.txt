@@ -1,0 +1,29 @@
+Received: from mail.example.com (mail.example.com [203.0.113.10])
+	by mx.example.com (Postfix) with ESMTPS id 6C1A0B77
+	for <d.chen@example.com>; Mon, 13 Oct 2025 09:05:41 +0000
+From: "Priya Raman" <priya.raman@example.com>
+To: "D. Chen" <d.chen@example.com>, "Sam Idris" <sam.idris@example.com>
+Subject: Quarterly planning meeting moved to Thursday
+Date: Mon, 13 Oct 2025 09:05:38 +0000
+Message-ID: <9f2b71c4@example.com>
+Authentication-Results: mx.example.com; spf=pass smtp.mailfrom=example.com; dkim=pass header.d=example.com; dmarc=pass header.from=example.com
+Received-SPF: pass (mx.example.com: domain of priya.raman@example.com designates 203.0.113.10 as permitted sender) client-ip=203.0.113.10;
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+
+Hi both,
+
+Just to confirm, the quarterly planning meeting has moved from Wednesday to
+Thursday at 14:00 in the small meeting room. The agenda and last quarter's
+numbers are on the intranet page:
+https://intranet.example.com/meetings/quarterly
+
+Could you add any items you want to cover to the shared notes before
+Wednesday evening, so I can send out the final agenda on Thursday morning?
+
+Thanks,
+Priya
+
+--
+Priya Raman
+Operations Coordinator, Example Ltd

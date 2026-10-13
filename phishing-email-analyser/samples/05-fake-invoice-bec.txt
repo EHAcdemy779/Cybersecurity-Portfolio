@@ -1,0 +1,32 @@
+Return-Path: <accounts@example-supplier.example>
+Received: from mail.example-supplier.example (mail.example-supplier.example [198.51.100.61])
+	by mx.example.com (Postfix) with ESMTPS id 21B7C4D0
+	for <finance@example.com>; Fri, 17 Oct 2025 11:41:20 +0000
+From: "Marek Novak - Example Supplies Ltd" <accounts@example-supplier.example>
+To: finance@example.com
+Reply-To: "M. Novak" <marek.novak.invoices@mailbox-provider.invalid>
+Subject: Updated banking details for invoice INV-2291
+Date: Fri, 17 Oct 2025 11:41:18 +0000
+Message-ID: <5f2a1c@example-supplier.example>
+Authentication-Results: mx.example.com; spf=pass smtp.mailfrom=example-supplier.example; dkim=pass header.d=example-supplier.example; dmarc=pass header.from=example-supplier.example
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+
+Hi,
+
+Are you at your desk? I need this handled today and please keep it confidential
+until it is done.
+
+Following an internal audit we have moved our bank account. Please update your
+supplier records with our new account details and settle the outstanding invoice
+INV-2291 to the account below instead of the one on the original invoice.
+
+The revised remittance details are attached as a PDF. Please confirm once the
+wire transfer has been scheduled.
+
+Please do not discuss this with anyone else in the accounts team for now - I
+would rather not cause confusion while the migration is still in progress.
+Reply from your personal email if that is easier.
+
+Thanks,
+Marek

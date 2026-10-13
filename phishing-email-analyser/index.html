@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<!--
+  Content Security Policy:
+  - default-src 'self'      : only load files that sit beside this page
+  - connect-src 'none'      : the page may not make ANY network request
+  - script-src 'self'       : no inline scripts, no third-party scripts
+  - style-src 'self' 'unsafe-inline' : external stylesheet plus small inline
+                              style values used for the score dial and bars
+  - img-src 'self' data:    : same-origin images only
+  - form-action 'none'      : nothing on this page can submit anywhere
+  This is the technical guarantee that pasted email content cannot be sent
+  anywhere, on top of the fact that no networking code exists in this project.
+-->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="description" content="Educational phishing email analyser that runs entirely in your browser. Your email content is never uploaded anywhere.">
+<title>Phishing Email Analyser — educational triage tool</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#analyser">Skip to the analyser</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">PEA</span>
+      <span class="brand-text">
+        <strong>Phishing Email Analyser</strong>
+        <small>Educational triage tool &middot; runs entirely in your browser</small>
+      </span>
+    </a>
+    <nav aria-label="Main">
+      <ul class="nav">
+        <li><a href="#analyser">Analyser</a></li>
+        <li><a href="#method">Method</a></li>
+        <li><a href="#checks">The checks</a></li>
+        <li><a href="#learn">Learn</a></li>
+        <li><a href="#privacy">Privacy</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="privacy-strip">
+  <div class="wrap">
+    <p><span aria-hidden="true">&#128274;</span> <strong>Your email is analysed locally in your browser.</strong>
+    Nothing is uploaded, stored, logged or sent to any server, AI provider or analytics service. This page contains no tracking of any kind.</p>
+  </div>
+</div>
+
+<main id="top">
+  <section class="wrap hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Cyber security education &middot; email analysis</p>
+      <h1>Understand <em>why</em> a suspicious email is suspicious.</h1>
+      <p class="lede">Paste a suspicious email and this tool lists the warning signs it can find: pressure tactics, credential requests, lookalike links, dangerous attachments and email authentication failures. Every point of the score is explained, and every explanation tells you what to do next.</p>
+      <ul class="hero-points">
+        <li><span aria-hidden="true">&#10003;</span> Runs completely offline after the page loads</li>
+        <li><span aria-hidden="true">&#10003;</span> 44 transparent checks, each with a published point value</li>
+        <li><span aria-hidden="true">&#10003;</span> No accounts, no cookies, no telemetry, no AI services</li>
+      </ul>
+    </div>
+    <aside class="hero-card" aria-label="Important safety notice">
+      <h2>Please read first</h2>
+      <p><strong>This tool cannot decide whether an email is malicious.</strong> It identifies warning signs and explains them. Only independent verification can confirm a message is genuine.</p>
+      <p><strong>Never click a suspicious link or open an attachment to "test" it</strong> - not even in this tool. Links found in a message are shown here in a deliberately broken form (hxxp://example[.]com) so they cannot be clicked by accident.</p>
+      <p>If a message asks for money, credentials or a change of bank details, confirm it using a contact detail you already have - never one supplied in the message.</p>
+    </aside>
+  </section>
+<section class="wrap section" id="analyser">
+    <div class="section-head">
+      <h2>Analyse an email</h2>
+      <p>Paste the message. For the fullest result, include the raw headers as well as the body - that is what allows the SPF, DKIM, DMARC and Reply-To checks to run.</p>
+    </div>
+
+    <div class="panel">
+      <div class="field">
+        <label for="emailInput">Email content</label>
+        <p class="field-hint" id="inputHint">Paste the full email, including the technical header block at the top if you have it. Nothing is saved or sent.</p>
+        <textarea id="emailInput" spellcheck="false" aria-describedby="inputHint charCount"
+          placeholder="From: &quot;Name&quot; &lt;name@example.com&gt;&#10;Reply-To: ...&#10;Subject: ...&#10;&#10;Dear Customer, ..."></textarea>
+        <div class="input-meta">
+          <span id="charCount">0 characters</span>
+          <span id="inputError" class="error" role="alert"></span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" id="analyseBtn" class="btn btn-primary">Analyse Email</button>
+        <button type="button" id="clearBtn" class="btn">Clear</button>
+        <span id="demoBadge" class="badge" hidden>Demo Data</span>
+      </div>
+
+      <details class="helper">
+        <summary>Where do I find the raw headers?</summary>
+        <div class="helper-body">
+          <ul>
+            <li><strong>Outlook (desktop):</strong> open the message, choose <em>File</em>, then <em>Properties</em>, and copy the text next to <em>Internet headers</em>.</li>
+            <li><strong>Outlook on the web:</strong> open the message, choose the <em>More actions</em> menu, then <em>View</em>, then <em>View message source</em>.</li>
+            <li><strong>Gmail:</strong> open the message, choose the three dots next to the reply arrow, then <em>Show original</em>, and copy the text.</li>
+            <li>Paste the headers first and the body underneath. If you only have the body, the analysis still works - it simply reports that the identity checks were skipped.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="helper" open>
+        <summary>Try a fictional example (all safe, all made up)</summary>
+        <div class="helper-body">
+          <p class="small">Each example is a made-up message that uses reserved documentation domains (<code>example.com</code>, <code>.example</code>, <code>.invalid</code>). None of them contains a working link or a real malicious domain.</p>
+          <div id="demoButtons" class="demo-buttons"></div>
+          <p id="demoNote" class="small muted"></p>
+        </div>
+      </details>
+    </div>
+
+    <div id="resultsStatus" class="visually-hidden" role="status" aria-live="polite"></div>
+
+    <section id="results" class="results" hidden aria-labelledby="resultsTitle" tabindex="-1">
+      <h2 id="resultsTitle">Analysis result</h2>
+
+      <div class="score-card">
+        <div class="dial">
+          <svg viewBox="0 0 120 120" role="img" aria-hidden="true" focusable="false">
+            <circle class="dial-track" cx="60" cy="60" r="52"></circle>
+            <circle id="scoreArc" class="dial-arc level-none" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="dial-text">
+            <span id="scoreValue" class="dial-value">0</span>
+            <span class="dial-max">/ 100</span>
+          </div>
+        </div>
+        <div class="score-copy">
+          <p id="bandLabel" class="band level-none">No Warning Signs Detected</p>
+          <p id="bandMeaning" class="band-meaning"></p>
+          <p id="scoreNote" class="small muted"></p>
+          <p id="checksSummary" class="small"></p>
+          <p class="small muted">This score is a tally of the warning signs listed below. It is a triage aid, not a probability that the email is malicious, and a low score does not prove an email is safe.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <section class="panel" aria-labelledby="overviewTitle">
+          <h3 id="overviewTitle">What was examined</h3>
+          <dl id="overviewList" class="overview"></dl>
+        </section>
+        <section class="panel" aria-labelledby="recTitle">
+          <h3 id="recTitle">What to do next</h3>
+          <ol id="recommendationsList" class="recommendations"></ol>
+        </section>
+      </div>
+
+      <h3 id="findingsTitle" class="findings-title">Warning signs found</h3>
+      <p class="small muted">Ordered by investigative priority, highest first. Every entry shows the wording or value that triggered it, why it matters, an innocent explanation to consider, and what to do about it.</p>
+      <div id="findingsList" class="findings"></div>
+
+      <details class="helper">
+        <summary>Show every check that was performed</summary>
+        <div class="helper-body">
+          <p class="small">This is the complete list of checks run against your text, including the ones that did <strong>not</strong> match. Transparency matters: you should always be able to see what was looked for and what was found.</p>
+          <div class="table-scroll">
+            <table id="checksTable">
+              <caption class="visually-hidden">All checks performed, with point value and result</caption>
+              <thead>
+                <tr><th scope="col">Check</th><th scope="col">Category</th><th scope="col">Points</th><th scope="col">Result</th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+    </section>
+<section class="wrap section" id="method">
+    <div class="section-head">
+      <h2>How the score works</h2>
+      <p>No hidden mathematics: every check has a fixed point value, and the score is simply those values added together, capped at 100.</p>
+    </div>
+    <div class="grid-3">
+      <article class="card">
+        <h3>1. Fixed weights</h3>
+        <p>Each check carries a published number of points, chosen to reflect how strongly that warning sign usually indicates a phishing attempt - not how "certain" anything is. Asking for a password is worth more than an impersonal greeting.</p>
+      </article>
+      <article class="card">
+        <h3>2. Plain addition</h3>
+        <p>The points of every matched check are added together and the total is capped at 100. Nothing is weighted secretly, randomised or learned from data, so the same email always produces the same result.</p>
+      </article>
+      <article class="card">
+        <h3>3. Bands, not verdicts</h3>
+        <p>The total is placed into a band: 0 no warning signs, 1-19 Low Risk, 20-49 Suspicious, 50-100 High Risk. The band describes investigative priority. It is not a probability, and it never means "this email is malicious".</p>
+      </article>
+    </div>
+    <div class="callout">
+      <p><strong>Why a low score is not a clean bill of health.</strong> A well-made phishing email can be short, polite and free of any obvious trickery. If a message asks you for money, credentials, a code or a change of bank details, treat it as suspicious no matter what any tool says - including this one.</p>
+      <p><strong>Why a high score is not proof.</strong> Real businesses send invoices, password notices and delivery updates every day. Those legitimate messages can match several checks at once, which is exactly why every finding here comes with an innocent explanation to consider.</p>
+    </div>
+  </section>
+
+  <section class="wrap section" id="checks">
+    <div class="section-head">
+      <h2>The checks, and what each one is worth</h2>
+      <p>All 44 checks, with their point values, are listed below. This is the entire scoring model - there is nothing else.</p>
+    </div>
+    <details class="panel collapsible">
+      <summary>Show the full check list with point values</summary>
+      <div class="table-scroll">
+        <table id="rulesTable">
+          <caption class="visually-hidden">Every check, its category, its point value and the warning-sign level it represents</caption>
+          <thead>
+            <tr>
+              <th scope="col">Check</th>
+              <th scope="col">Category</th>
+              <th scope="col">Points</th>
+              <th scope="col">Level</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="small muted">Reassurance checks are worth 0 points on purpose: recognising good practice should never push a score up.</p>
+    </details>
+  </section>
+
+  <section class="wrap section" id="learn">
+    <div class="section-head">
+      <h2>How to think about a suspicious email</h2>
+      <p>A repeatable method beats gut feeling. This is the same reasoning an analyst follows.</p>
+    </div>
+    <ol class="steps">
+      <li><strong>Do not engage.</strong> No clicking, no opening attachments, no replying - not even to check whether it is real.</li>
+      <li><strong>Ask what it wants.</strong> Money, credentials, a one-time code, a change of bank details, or simply a click? The request itself is often the clearest signal.</li>
+      <li><strong>Check who really sent it.</strong> The display name is free text. The part after the @ and the domain in a link are what actually matter.</li>
+      <li><strong>Compare with your expectations.</strong> Were you expecting this invoice, parcel or password notice? Unrequested contact is a warning sign on its own.</li>
+      <li><strong>Verify out of band.</strong> Use the organisation's own app or website, or a phone number you look up independently. Never a contact detail from the message.</li>
+      <li><strong>Report and delete.</strong> Reporting helps whoever protects the rest of the organisation, and deleting removes the temptation to act on it later.</li>
+    </ol>
+    <div class="callout">
+      <p><strong>The key lesson:</strong> a warning sign is a reason to slow down and check, not a conclusion. Analysis tells you where to look; verification tells you what is true.</p>
+      <p><strong>Safe practice:</strong> never test a suspicious link or attachment on your own device, and never on a work device. If you must examine a link, use an email client's link preview or a dedicated isolated environment - and only on systems you own or are authorised to use.</p>
+    </div>
+  </section>
+<section class="wrap section" id="privacy">
+    <div class="section-head">
+      <h2>Privacy by design</h2>
+      <p>This tool was built so that it cannot leak what you paste into it.</p>
+    </div>
+    <div class="grid-2">
+      <article class="card">
+        <h3>What happens to your text</h3>
+        <ul class="ticks">
+          <li>It stays in the memory of this browser tab and disappears when you close it.</li>
+          <li>It is never uploaded to a server, an AI service, a database or an analytics platform.</li>
+          <li>There are no cookies, no local storage, no session identifiers and no telemetry.</li>
+          <li>Nothing you paste is logged, saved or shared with anyone.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>How that is guaranteed</h3>
+        <ul class="ticks">
+          <li>This project contains no networking code at all - no calls that could send data anywhere.</li>
+          <li>A Content Security Policy in the page tells the browser to block every outgoing connection (connect-src 'none').</li>
+          <li>You can confirm it yourself: open your browser's developer tools, choose the Network tab, analyse an email, and watch that no requests appear.</li>
+          <li>Links found in an email are never opened or fetched, and they are displayed in a broken form so you cannot click them by accident.</li>
+        </ul>
+      </article>
+    </div>
+    <div class="callout warn">
+      <p><strong>Treat pasted content as private.</strong> Even though nothing leaves your browser, a real phishing email can contain personal data, internal addresses or tokens. Be careful about screenshots and recordings if you plan to share them.</p>
+    </div>
+  </section>
+
+  <section class="wrap section" id="limits">
+    <div class="section-head">
+      <h2>What this tool cannot do</h2>
+      <p>Honest limits, so you know where the tool ends and your own judgement begins.</p>
+    </div>
+    <ul class="limits">
+      <li>It cannot prove whether a message is malicious, and it cannot detect every kind of attack.</li>
+      <li>It only sees text you paste. Anything hidden behind an image, a QR code, an attachment or a web page is invisible to it.</li>
+      <li>The SPF, DKIM, DMARC and address checks only work if the raw headers are included. Forwarded messages often carry misleading headers.</li>
+      <li>Copying text out of a mail client can change formatting, break links or drop header lines, which affects the result.</li>
+      <li>Brand and lookalike detection covers the well-known organisations listed in the check table, not every company in the world.</li>
+      <li>Wording varies enormously between languages and cultures. Non-English messages will match far fewer checks.</li>
+      <li>A genuine email can score highly (invoices, delivery notices, password confirmations) and a well-crafted phishing email can score low.</li>
+      <li>This is an educational aid. It is not an email security gateway and does not replace one.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="disclaimer"><strong>Educational triage tool.</strong> Results identify warning signs that deserve investigation and do not prove malicious behaviour. Never click suspicious links or open suspicious attachments to test them. Verify important messages using an organisation's official website, application, or a contact detail you already have.</p>
+    <p class="small muted">Phishing Email Analyser &middot; static page, no server, no accounts, no tracking &middot; fictional examples use reserved documentation domains and addresses only.</p>
+    <p class="small"><a href="#top">Back to top</a></p>
+  </div>
+</footer>
+
+<script src="engine.js"></script>
+<script src="samples/demo-emails.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
+  </section>

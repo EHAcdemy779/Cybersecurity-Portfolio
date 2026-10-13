@@ -1,0 +1,35 @@
+Return-Path: <delivery@parcel-notice-service.invalid>
+Received: from unknown (unknown [198.51.100.77])
+	by mx.example.net (Postfix) with ESMTPSA id 7D2E90F4
+	for <j.okafor@example.net>; Thu, 16 Oct 2025 06:15:02 +0000
+From: "DHL Delivery Support" <no-reply@dhl-parcel-fee.example>
+To: j.okafor@example.net
+Reply-To: "DHL Reschedule" <reschedule@dhl-parcel-fee.example>
+Subject: Your parcel is on hold - redelivery fee required
+Date: Thu, 16 Oct 2025 06:15:00 +0000
+Message-ID: <7781-c2@dhl-parcel-fee.example>
+Authentication-Results: mx.example.net; spf=pass smtp.mailfrom=dhl-parcel-fee.example; dkim=pass header.d=dhl-parcel-fee.example; dmarc=pass header.from=dhl-parcel-fee.example
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+
+Dear Customer,
+
+We attempted to deliver parcel DHL-4471-88213 today but there was no answer.
+Your parcel is now being held at our depot and will be returned to the sender
+if the outstanding amount is not paid within 48 hours.
+
+To arrange redelivery you must pay the handling fee of 1.99 using the secure
+payment page below. Payment by gift card is also accepted if you prefer -
+please reply with the voucher codes.
+
+Reschedule and pay here:
+hxxps://dhl-parcel-fee.example/pay?id=447188213
+
+You will need to confirm your card details and the one-time code sent by your
+bank to complete the payment.
+
+If you did not order anything, please ignore this message. Do not contact the
+depot directly, as this will delay the return process.
+
+DHL Delivery Support
+This is an automated message, please do not reply.

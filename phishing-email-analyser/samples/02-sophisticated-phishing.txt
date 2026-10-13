@@ -1,0 +1,34 @@
+Received: from mail.example-hr-portal.example (mail.example-hr-portal.example [198.51.100.24])
+	by mx.example.com (Postfix) with ESMTPS id 91C4F3A1
+	for <d.chen@example.com>; Tue, 14 Oct 2025 08:02:11 +0000
+From: "People Operations" <notifications@example-hr-portal.example>
+To: "D. Chen" <d.chen@example.com>
+Reply-To: "People Operations" <notifications@example-hr-portal.example>
+Subject: Reminder: benefits enrolment must be confirmed before it expires
+Date: Tue, 14 Oct 2025 08:02:09 +0000
+Message-ID: <b7c1a9d4e2@example-hr-portal.example>
+Authentication-Results: mx.example.com; spf=pass smtp.mailfrom=example-hr-portal.example; dkim=pass header.d=example-hr-portal.example; dmarc=pass header.from=example-hr-portal.example
+Received-SPF: pass (mx.example.com: domain of notifications@example-hr-portal.example designates 198.51.100.24 as permitted sender) client-ip=198.51.100.24;
+DKIM-Signature: v=1; a=rsa-sha256; d=example-hr-portal.example; s=mail; c=relaxed/relaxed;
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+
+Hello,
+
+Our records show that your benefits enrolment for the current cycle has not
+yet been confirmed. This window expires soon, and the changes you selected
+will lapse if nothing is submitted.
+
+Please confirm your details using the employee benefits portal:
+
+  hxxps://example-hr-portal.example/enrol
+
+You will be asked to sign in with your work email address and password so that
+the system can match your record.
+
+Thank you for your prompt attention.
+
+Kind regards,
+People Operations
+Example Group
+(sent on behalf of the benefits administration team)

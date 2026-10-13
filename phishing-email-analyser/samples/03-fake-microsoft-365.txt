@@ -1,0 +1,35 @@
+Return-Path: <bounce@micros0ft-support.invalid>
+Received: from unknown (unknown [192.0.2.201])
+	by mx.example.org (Postfix) with ESMTP id 55A1B7C9
+	for <k.turner@example.org>; Wed, 15 Oct 2025 21:47:33 +0000
+From: "Microsoft 365" <account-protection@micros0ft-support.invalid>
+To: k.turner@example.org
+Reply-To: "Microsoft 365 Recovery" <case-884213@mailbox-provider.invalid>
+Subject: Unusual sign-in activity detected on your Microsoft 365 account
+Date: Wed, 15 Oct 2025 21:47:30 +0000
+Message-ID: <884213.9921@micros0ft-support.invalid>
+Authentication-Results: mx.example.org; spf=fail smtp.mailfrom=micros0ft-support.invalid; dkim=none; dmarc=fail (p=none sp=none) header.from=micros0ft-support.invalid
+Received-SPF: softfail (mx.example.org: domain of account-protection@micros0ft-support.invalid does not designate 192.0.2.201 as permitted sender) client-ip=192.0.2.201;
+MIME-Version: 1.0
+Content-Type: text/html; charset="utf-8"
+
+<html><body>
+<p>Dear User,</p>
+
+<p>We detected unusual sign-in activity on your Microsoft 365 account from an
+unrecognised device. To keep your mailbox secure, you must verify your account
+and confirm your identity before your access is restricted.</p>
+
+<p>Please sign in to continue:</p>
+
+<p><a href="hxxps://bit[.]ly/DEMO-EXAMPLE-NOT-REAL-001">https://login.microsoftonline.com/common/oauth2/v2.0/authorize</a></p>
+
+<p>You will be asked for your email address and password, and then the
+verification code we send to your phone. Please have both ready.</p>
+
+<p>If you do not verify your account within 24 hours, your mailbox will be
+suspended and your OneDrive files will be permanently deleted.</p>
+
+<p>Thank you,<br>
+Microsoft 365 Account Protection Team</p>
+</body></html>
